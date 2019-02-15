@@ -1,0 +1,27 @@
+.:
+[1]:
+benchmark             old ns/op     new ns/op     delta
+BenchmarkSet          542594852     0.69          -100.00%
+BenchmarkSet-4        350770599     0.79          -100.00%
+BenchmarkExist        0.25          0.26          +4.00%
+BenchmarkExist-4      0.26          0.25          -3.85%
+BenchmarkDelete       0.32          0.28          -12.50%
+BenchmarkDelete-4     0.30          0.62          +106.67%
+
+benchmark             old allocs     new allocs     delta
+BenchmarkSet          43892          0              -100.00%
+BenchmarkSet-4        29962          0              -100.00%
+BenchmarkExist        0              0              +0.00%
+BenchmarkExist-4      0              0              +0.00%
+BenchmarkDelete       0              0              +0.00%
+BenchmarkDelete-4     0              0              +0.00%
+
+benchmark             old bytes     new bytes     delta
+BenchmarkSet          44070800      0             -100.00%
+BenchmarkSet-4        29417978      0             -100.00%
+BenchmarkExist        0             0             +0.00%
+BenchmarkExist-4      0             0             +0.00%
+BenchmarkDelete       0             0             +0.00%
+BenchmarkDelete-4     0             0             +0.00%
+
+

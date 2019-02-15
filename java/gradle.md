@@ -1,0 +1,2 @@
+##### gradle multi-project
+https://softnoise.wordpress.com/2014/09/07/gradle-sub-project-test-dependencies-in-multi-project-builds/

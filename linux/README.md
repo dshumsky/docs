@@ -1,0 +1,77 @@
+### Linux
+
+#### Ubuntu
+
+- Enable SSH:  ```apt-get install openssh-server openssh-client```
+- Install Mate (https://linuxconfig.org/how-to-install-mate-desktop-on-ubuntu-18-04-bionic-beaver-linux)
+- Terminal history: ```sudo vim /etc/inputrc```
+- System > Preferences > Hardware > Keyboard Shortcuts: **shutter -s**
+- https://extensions.gnome.org/extension/1160/dash-to-panel/
+- https://extensions.gnome.org/extension/723/pixel-saver/
+- https://extensions.gnome.org/extension/310/alt-tab-workspace/
+- dconf-editor (/org/gnome/desktop/wm/keybindings/switch-to-workspace-*)
+- Tweaks -> Fonts -> Scaling Factor
+- `sudo apt-get install compizconfig-settings-manager`, ccsm > Desktop > Desktop Wall
+- `sudo vim /etc/sudoers`, add `username ALL=(ALL) NOPASSWD: ALL`
+- ...
+
+#### Suspend Fix
+- `sudo dd if=/dev/null of=/var/log/syslog` to clear syslog
+- `systemctl suspend -i`
+- `http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html`
+
+#### Commands
+- Find file and do something: [http://find.unixpin.com/ru/index.html](http://find.unixpin.com/ru/index.html)
+
+- Find and replace
+```bash
+find . -type f -name "*.xml" -exec sed -i "s/spring-beans-2\.0\.xsd/spring-beans-3\.0\.xsd/g" {} \;
+```
+- Replace
+```bash
+sed '/#.*/ d; /^$/ d' /etc/my.cnf
+```
+- Find file with content
+```bash
+find . -name "*.java" -exec grep "save\|update" {} \;  -print
+```
+
+- Zip files from txt-file
+```
+zip files.zip -@ < files.txt
+```
+- Find file in archives
+```
+for f in `ls *.jar`; do echo "$f: "; unzip -l $f | grep 'Table'; done
+```
+
+#### Audio
+
+##### Audio. Configure `switch-on-connect` 
+1. create ~/.config/pulse/default.pa if it doesn't exist and append
+```
+.include /etc/pulse/default.pa
+load-module module-switch-on-connect
+```
+This is better than editing /etc/pulse/default.pa.
+Afterwards you should run ```pulseaudio -k && pulseaudio --start``` to have the changes take effect.
+
+##### Audio. Fix `Dummy Output`
+```
+pulseaudio --kill
+sudo alsa force-reload
+pulseaudio --start
+```
+
+##### Audio. Fix `Jabra Audio`
+Add to `/usr/share/X11/xorg.conf.d/jabra.conf` (with sudo) and then restart  
+```
+Section "InputClass"
+    Identifier "Jabra Audio docking station"
+    MatchDevicePath "/dev/input/event*"
+    MatchProduct "Netcom"
+    MatchVendor "GN_Netcom_A_S"
+    Option "Ignore" "true"
+EndSection
+```
+you can disconnect/connect the headset or start without it and then connect it and nothing freezes.
