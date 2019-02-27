@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="./VarnishExplained_files/bootstrap.min.css" rel="stylesheet">
+    <link href="./VarnishExplained_files/clean-blog.css" rel="stylesheet">
+    <link href="./VarnishExplained_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+<title>Varnish Explained</title>
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Varnish Explained">
+<meta property="og:description" content="A few months ago, I gave a presentation at LaraconEU in Amsterdam titled &quot;Varnish for PHP developers&quot;. The generic title of that presentation is actually Varnish Explained and this is a write-up of that presentation, the video and the slides. The simplest way to get a grip of the basics of Varnish would be to watch …">
+<meta property="og:url" content="https://ma.ttias.be/varnish-explained/">
+<meta property="og:site_name" content="ma.ttias.be">
+<meta property="article:publisher" content="https://www.facebook.com/www.ma.ttias.be">
+<meta property="article:author" content="https://www.facebook.com/www.ma.ttias.be">
+<meta property="article:tag" content="performance">
+<meta property="article:tag" content="presentation">
+<meta property="article:tag" content="varnish">
+<meta property="article:tag" content="webdevelopment">
+<meta property="article:section" content="presentation">
+<meta property="article:published_time" content="2016-10-20T01:33:50+00:00">
+<meta property="article:modified_time" content="2017-09-14T07:29:04+00:00">
+<meta property="og:updated_time" content="2017-09-14T07:29:04+00:00">
+<meta property="og:image" content="https://ma.ttias.be/wp-content/uploads/2014/11/mattias_geniar_public_speaking-1024x314.png">
+<meta property="og:image:secure_url" content="https://ma.ttias.be/wp-content/uploads/2014/11/mattias_geniar_public_speaking-1024x314.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="314">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="A few months ago, I gave a presentation at LaraconEU in Amsterdam titled &quot;Varnish for PHP developers&quot;. The generic title of that presentation is actually Varnish Explained and this is a write-up of that presentation, the video and the slides. The simplest way to get a grip of the basics of Varnish would be to watch […]">
+<meta name="twitter:title" content="Varnish Explained">
+<meta name="twitter:site" content="@mattiasgeniar">
+<meta name="twitter:image" content="https://ma.ttias.be/wp-content/uploads/2014/11/mattias_geniar_public_speaking.png">
+<meta name="twitter:creator" content="@mattiasgeniar">
+<script async="" src="./VarnishExplained_files/analytics.js"></script><script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"Person","url":"https:\/\/ma.ttias.be\/","sameAs":["https:\/\/www.facebook.com\/www.ma.ttias.be","https:\/\/www.linkedin.com\/in\/mattiasgeniar","https:\/\/plus.google.com\/+MattiasGeniar","https:\/\/twitter.com\/mattiasgeniar"],"@id":"#person","name":"Mattias Geniar"}</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<meta name="generator" content="WordPress 4.9.9">
+<style type="text/css">img#wpstats{display:none}</style></head>
+
+<body>
+<div class="container">
+	<article>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+					<h1>Varnish Explained</h1>
+					<small class="meta_date">Mattias Geniar, Thursday, October 20, 2016 - <i>last modified: Thursday, September 14, 2017</i></small>
+
+					<div class="blogpost_content">
+						<p class="lead">A few months ago, I gave a presentation at <a href="http://laracon.eu/2016/">LaraconEU</a> in Amsterdam titled "Varnish for PHP developers". The generic title of that presentation is actually&nbsp;<strong>Varnish Explained</strong> and this is a write-up of that presentation, the video and the slides.</p>
+
+
+
+						<p>This is the recording of the talk at LaraconEU on August 2016.</p>
+						<p></p>
+						<h1>Varnish Explained</h1>
+						<p>Here's a write-up per slide, with the most important topics.</p>
+						<p><em>(Alternatively, if you prefer to just skim through the slides, <a href="https://speakerdeck.com/mattiasgeniar/varnish-for-php-developers-laraconeu-2016">they are up on Speakerdeck</a> too.)</em></p>
+						<p><img class="alignnone size-full wp-image-8238" src="./VarnishExplained_files/varnish_explained_002.png" alt="varnish_explained_002" width="2816" height="2176"></p>
+						<p>In order to fully understand Varnish, it's vital that you understand the HTTP protocol (at least the basics) and how its HTTP headers are formed and which purpose they serve.</p>
+						<p>Later on, I'll cover the Varnish internals, cool acronyms like ESI, Grace, TTL &amp; more.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_003.png" alt="varnish_explained_003" width="2816" height="2176" class="alignnone size-full wp-image-8240"></p>
+						<p>A quick introduction: I'm Mattias Geniar, I'm the Support/Operations manager at <a href="https://www.nucleus.be/en/">Nucleus Hosting</a> in Belgium. </p>
+						<p>I run the <a href="https://www.cronweekly.com/">cron.weekly linux &amp; open source newsletter</a> and, when I find the time, host the <a href="http://podcast.sysca.st/">SysCast podcast</a>.</p>
+						<hr>
+						<h1>Part One: What's Varnish?</h1>
+						<p><img src="./VarnishExplained_files/varnish_explained_004.png" alt="varnish_explained_004" width="2816" height="2176" class="alignnone size-full wp-image-8241"></p>
+						<p>Let's go.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_005.png" alt="varnish_explained_005" width="2816" height="2176" class="alignnone size-full wp-image-8243"></p>
+						<p>Varnish can do a lot of things, but it's mostly known as a reverse HTTP proxy. It brands itself as an HTTP accelerator, making HTTP requests faster by caching them.</p>
+						<p>It can also serve as a TCP load balancer (using <code>pipe</code> in the VCL code, more on that later), an HTTP load balancer or a generic reverse proxy.</p>
+						<p>It uses the Varnish Configuration Language (VCL) to allow you as a developer or sysadmin to modify the behaviour of Varnish and to play with the HTTP protocol to shape it so it behaves the way you want.</p>
+						<p>Varnish is also extendable with VMODs, modules that can be loaded by varnish and provide additional functions/methods and functionality you can call upon in your VCL configurations. Think of these like PHP extensions; binary files that are loaded by Varnish that extend the userspace in which you can create VCL configurations.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_006.png" alt="varnish_explained_006" width="2816" height="2176" class="alignnone size-full wp-image-8244"></p>
+						<p>A couple of important versions: Varnish 3.x is probably the most widely used, but is now EOL (so: no more security updates). Varnish 4.1 is still supported and <a href="https://ma.ttias.be/varnish-cache-5-0-released/">Varnish 5</a> came out a few weeks ago (so the slides are slightly outdated).</p>
+						<p>If you're upgrading from Varnish 3.x to later: beware, the configurations changed drastically. You'll need to update your syntax/methods in Varnish, or Varnish won't start.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_007.png" alt="varnish_explained_007" width="2816" height="2176" class="alignnone size-full wp-image-8245"></p>
+						<p>Using Varnish in your infrastructure gives you a couple of advantages: performance, scalability, control &amp; security.</p>
+						<p>Varnish is usually associated with performance, but it greatly increases your options to scale your infrastructure (load balancing, failover backends etc) and adds a security layer right out of the box: you can easily let Varnish protect you from the <a href="https://httpoxy.org/">httpoxy</a> vulnerability or <a href="https://ma.ttias.be/effectively-using-detecting-the-slowloris-http-dos-tool/">slowloris type attacks</a>.</p>
+						<hr>
+						<h1>Part Deux: HTTP Headers</h1>
+						<p><img src="./VarnishExplained_files/varnish_explained_008.png" alt="varnish_explained_008" width="2816" height="2176" class="alignnone size-full wp-image-8247"></p>
+						<p>Let's talk HTTP headers.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_009.png" alt="varnish_explained_009" width="2816" height="2176" class="alignnone size-full wp-image-8248"></p>
+						<p>A quick summary of HTTP headers: there are request and response headers (basically what your User Agent (=browser) requests and what the Server (Apache/Nginx) responds) and Varnish listens to these by default to determine if requests can or should be cached.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_010.png" alt="varnish_explained_010" width="2816" height="2176" class="alignnone size-full wp-image-8249"></p>
+						<p>Whenever your browser goes to a certain website, it'll a do a few low-level things: it'll resolve the DNS of the hostname you want to browse to, open a TCP connection to that IP and start sending the HTTP request headers.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_011.png" alt="varnish_explained_011" width="2816" height="2176" class="alignnone size-full wp-image-8250"></p>
+						<p>They are basically a new-line separated key/value pair. The <a href="https://ma.ttias.be/architecting-websites-http2-era/">concepts are the same in HTTP/2</a>, except it's binary and more structured.</p>
+						<p>The browser describes the kind of response it can receive (plain text, compressed), what site it wants to load (because remember, the browser just connected to the IP, it now needs to tell the webserver which website at that IP address it wants to load).</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_012.png" alt="varnish_explained_012" width="2816" height="2176" class="alignnone size-full wp-image-8251"></p>
+						<p>If all goes well, the server will respond with a similar set of headers: the response headers. It will confirm the HTTP protocol (or down/up-grade the protocol), give a status code and describe the response (plain text / compressed).</p>
+						<p>Good, that was the HTTP reminder -- now let's get to Varnish.</p>
+						<h1>Part Three: How does Varnish work?</h1>
+						<p><img src="./VarnishExplained_files/varnish_explained_013.png" alt="varnish_explained_013" width="2816" height="2176" class="alignnone size-full wp-image-8252"></p>
+						<p>Go!</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_014.png" alt="varnish_explained_014" width="2816" height="2176" class="alignnone size-full wp-image-8253"></p>
+						<p>Varnish is a reverse proxy, so it sits between the User Agent (the browser) and the webserver. It makes decisions to either deliver a cached version of the page, or send the request to the backend webserver for processing.</p>
+						<p>By default, it'll do so by listening to the HTTP headers the client sends as well as the ones the server responds with. But, those usually suck -- creating the need for proper <a href="https://github.com/mattiasgeniar/varnish-4.0-configuration-templates">Varnish templates</a> to avoid boilerplate code being re-created all the time.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_015.png" alt="varnish_explained_015" width="2816" height="2176" class="alignnone size-full wp-image-8254"></p>
+						<p>In a normal scenario, the browser probably connects directly to the webserver, which in turn will let PHP execute the request. The simplest possible setup.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_016.png" alt="varnish_explained_016" width="2816" height="2176" class="alignnone size-full wp-image-8255"></p>
+						<p>When Varnish is introduced, a few things happen: the webserver is hidden to the user, as that user now only connects to Varnish. Varnish has bound itself on port <code>:80</code> and the webserver is either running on a different server or on an alternative port. It's Varnish that will make the connection to the webserver if needed, the user has no idea.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_017.png" alt="varnish_explained_017" width="2816" height="2176" class="alignnone size-full wp-image-8256"></p>
+						<p>If you follow <a href="http://book.varnish-software.com/3.0/VCL_Basics.html">the official Varnish book</a>, the "internals of Varnish" are described as this. While it's 100% correct, if you're new to Varnish, that image does you no good: it's scary, confusing and it teaches you nothing.</p>
+						<p>Instead of such a flowchart, I prefer to visualise Varnish slightly different.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_018.png" alt="varnish_explained_018" width="2816" height="2176" class="alignnone size-full wp-image-8257"></p>
+						<p>Let's start with a basic example: a user tries to connect to a server running Varnish. It'll make a connection to the port where Varnish is running and Varnish can start to process the request.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_019.png" alt="varnish_explained_019" width="2816" height="2176" class="alignnone size-full wp-image-8258"></p>
+						<p>It'll trigger a routine in Varnish called <code>vcl_recv()</code>.</p>
+						<p>It's a routine where you can write custom VCL code to manipulate requests, determine backends, redirect users, ... it gives you full control over the HTTP request of the user.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_020.png" alt="varnish_explained_020" width="2816" height="2176" class="alignnone size-full wp-image-8259"></p>
+						<p>After that routine, Varnish can do a cache lookup: the page the user is requesting, does it already exist in the cache?</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_021.png" alt="varnish_explained_021" width="2816" height="2176" class="alignnone size-full wp-image-8260"></p>
+						<p>If it does, it can serve that page to the user. Before it does that, it triggers a new internal routine called <code>vcl_deliver()</code>. It's another place in Varnish where you can manipulate the request, change the HTTP headers etc.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_022.png" alt="varnish_explained_022" width="2816" height="2176" class="alignnone size-full wp-image-8261"></p>
+						<p>Once that request is finished, Varnish sends the response to the user so he can render it on screen.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_023.png" alt="varnish_explained_023" width="2816" height="2176" class="alignnone size-full wp-image-8262"></p>
+						<p>Of course, not everything is a cache hit: if Varnish does a cache lookup but finds it doesn't have that object/request in the cache, it has to go and fetch that content from its own backend.</p>
+						<p>To do so, it'll trigger another internal routine called <code>vcl_backend_fetcht()</code>.</p>
+						<p>You guessed it, it's yet another place where you can further manipulate the request before it gets sent to the backend webserver(s).</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_024.png" alt="varnish_explained_024" width="2816" height="2176" class="alignnone size-full wp-image-8263"></p>
+						<p>That routine will eventually call out to another webserver and have it process the request the user made.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_025.png" alt="varnish_explained_025" width="2816" height="2176" class="alignnone size-full wp-image-8264"></p>
+						<p>Once the response was created on the backend webserver, Varnish will receive it and fire another routine: <code>vcl_backend_response()</code>. </p>
+						<p>Hey, yet another place to play with the HTTP protocol and change the headers etc. before Varnish will process the request internally.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_026.png" alt="varnish_explained_026" width="2816" height="2176" class="alignnone size-full wp-image-8265"></p>
+						<p>Varnish can then store the item in its cache (if it's cacheable) and deliver it to the client, via the same <code>vcl_deliver()</code> routine. </p>
+						<p>Pfew, what a ride!</p>
+						<hr>
+						<h1>Part Four: The Varnish Configuration Language</h1>
+						<p><img src="./VarnishExplained_files/varnish_explained_027.png" alt="varnish_explained_027" width="2816" height="2176" class="alignnone size-full wp-image-8266"></p>
+						<p>Now that you have a visual of the flows within Varnish, let's see what the configurations look like.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_028.png" alt="varnish_explained_028" width="2816" height="2176" class="alignnone size-full wp-image-8267"></p>
+						<p>The Varnish Configuration Language is a C-like language, which should be familiar to those writing PHP or JavaScript code. </p>
+						<p>It looks like the screenshot above, where routines are described using the <code>sub</code> keyword. For a complete example, have a look at <a href="https://github.com/mattiasgeniar/varnish-4.0-configuration-templates/blob/master/default.vcl">my varnish 4.x configuration templates</a>.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_029.png" alt="varnish_explained_029" width="2816" height="2176" class="alignnone size-full wp-image-8268"></p>
+						<p>Each of those routines I described earlier allow you to customise the HTTP request with that VCL language.</p>
+						<p>To do so, it offers you a few useful objects: <code>req</code>, <code>req.http</code>, ... Each of those objects represent a part of the HTTP protocol. There's <code>req.method</code> to indicate a GET, POST, PUT, PURGE, ...</p>
+						<p>There's <code>req.http</code> which contains all the raw HTTP headers sent by the client, so there's <code>req.http.host</code> for the Host-header, <code>req.http.User-Agent</code> for the User-Agent (Chrome/Firefox) of the client, ... </p>
+						<p>Just like the HTTP protocol itself, the HTTP headers are case insensitive. So <code>req.http.HOST</code> is the same as <code>req.http.host</code>. But do yourself a favour, pick a coding/style standard you like and stick to it.</p>
+						<p>In the example above we tell Varnish, in the <code>vcl_recv()</code> routine (the very first routine to be called by Varnish) to only deal with GET or HEAD requests. Anything with a different method (a POST, PUT, ...) will be sent to the backend webserver(s) via the <code>return (pass);</code> command, indicating that the request should be <em>passed on to</em> the backend.</p>
+						<p>Further down, we manipulate the cookies the client has set. This is probably the part where Varnish has thought me the most about the HTTP protocol! As a user, every cookie that is set on a particular domain gets sent to the server <em>for every request</em>. It's a single string, semi-colon delimited. You can change the value of cookies in Varnish, remove or add cookies, etc.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_030.png" alt="varnish_explained_030" width="2816" height="2176" class="alignnone size-full wp-image-8269"></p>
+						<p>You can also use Varnish to be a "dumb load balancer": it can look at the Host header sent by the user and redirect requests to different backends.</p>
+						<p>This would allow you to set up a single Varnish server which can send requests to multiple backend servers, depending on the site the user is requesting.</p>
+						<p>The <code>set req.backend = xxx;</code> code instructs varnish to use a particular backend for that HTTP request.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_031.png" alt="varnish_explained_031" width="2816" height="2176" class="alignnone size-full wp-image-8270"></p>
+						<p>A common task in Varnish is dealing with Cookies (more tips on that later by the way) and removing cookies for objects or HTTP requests that don't need them.</p>
+						<p>A typical example is content like CSS, JavaScript, images, ... whether cookies are set or not, chances are that the image won't change. So we remove cookies altogether to determine the cacheability of such an object.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_032.png" alt="varnish_explained_032" width="2816" height="2176" class="alignnone size-full wp-image-8271"></p>
+						<p>Alternatively, we could also modify the response the webserver has sent us, in case it was a cache miss.</p>
+						<p>If a webserver wants to set a new cookie, it'll send along one or multiple <code>Set-Cookie</code> headers. In Varnish, we can remove those headers by removing the <code>bereq.http.Set-Cookie</code> header, making it look like the webserver never even sent those requests in the first place!</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_033.png" alt="varnish_explained_033" width="2816" height="2176" class="alignnone size-full wp-image-8272"></p>
+						<p>Another interesting trick is to tell Varnish to never cache a response when it's an server error, something with a status code in the HTTP/500 range. By telling it to reply with <code>return (abandon);</code> it'll bail out that routine and exit the flow.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_034.png" alt="varnish_explained_034" width="2816" height="2176" class="alignnone size-full wp-image-8273"></p>
+						<p>In the <code>vcl_deliver();</code> routine you have a final place, right before the HTTP response is sent to your user, to add or remove HTTP headers.</p>
+						<p>I commonly use this to clean up the request: remove sensitive headers (like Apache or PHP version numbers), add some debug headers to indicate if it was a cache miss or hit, ... </p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_035.png" alt="varnish_explained_035" width="2816" height="2176" class="alignnone size-full wp-image-8274"></p>
+						<p>Having so many places to tinker with the request and response can make it hard to visualise where changes were happening and what the outcome would/could be. It can also make you question what's the best place to even <em>begin</em> to manipulate such a request.</p>
+						<p>To be honest: there's no right or wrong answer here. It depends on your setup. But, there are a couple of tricks to help work with Varnish.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_036.png" alt="varnish_explained_036" width="2816" height="2176" class="alignnone size-full wp-image-8275"></p>
+						<p>For example, let's run through a request in Varnish and see where/how we can play with it.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_037.png" alt="varnish_explained_037" width="2816" height="2176" class="alignnone size-full wp-image-8276"></p>
+						<p>In this example, a user wants to connect to our server and load <a href="https://laravel.com/">the laravel.com homepage</a>. It sends a request to load the <code>/</code> page (homepage) indicating that it's the Chrome User-Agent.</p>
+						<p>When Varnish receives that request, it'll start its <code>vcl_recv()</code> routine.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_038.png" alt="varnish_explained_038" width="2816" height="2176" class="alignnone size-full wp-image-8277"></p>
+						<p>In that <code>vcl_recv</code> routine, we can manipulate the request.</p>
+						<p>For instance, we can change the request so that it no longer wants to load <code>laravel.com</code> but <code>forge.laravel.com</code>, by setting a new value in the <code>req.http.host</code> object.</p>
+						<p>Important to know here: the user/client has no idea we're doing this. This is purely internally in Varnish. For the user, it still thinks it's going to receive a response for <code>laravel.com</code>!</p>
+						<p>Varnish will use that new information (the modified <code>req.http.host</code> and <code>req.http.User-Agent</code>) to check its cache if it has a response it can serve to the client. In this example, we'll assume it was a cache miss.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_039.png" alt="varnish_explained_039" width="2816" height="2176" class="alignnone size-full wp-image-8278"></p>
+						<p>So now Varnish has to fetch the content from its own backend webserver. But because we modified the request in <code>vcl_recv()</code>, Varnish will ask the backend for the website behind <code>forge.laravel.com</code>, claiming to be an IE5 User-Agent.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_040.png" alt="varnish_explained_040" width="2816" height="2176" class="alignnone size-full wp-image-8279"></p>
+						<p>The webserver does its thing, and if all goes well it can generate the homeapge for <code>forge.laravel.com</code>.</p>
+						<p>It'll respond with an <code>HTTP/200</code> status code, indicating everything was OK. It will also set a PHP session ID, tell that it was generated with the Apache Webserver and indicate that this HTTP response should not be cached, by setting a <code>Cache-Control: No-Cache</code> header.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_041.png" alt="varnish_explained_041" width="2816" height="2176" class="alignnone size-full wp-image-8280"></p>
+						<p>Varnish receives that response and triggers its routine <code>vcl_backend_response()</code>, where we can modify what the webserver sent us.</p>
+						<p>Even though the webserver said we should not cache the page (remember: <code>Cache-Control: No-Cache</code>), and Varnish would by default listen to that header and not cache the page, we can overwrite it by setting the <code>beresp.ttl</code> object. The TTL -- or Time To Live -- determines how long we can cache that object.</p>
+						<p>Additionally, we will overwrite the status code that the webserver sent us (<code>HTTP/200</code>) with one that we invented (<code>HTTP/123</code>). </p>
+						<p>And finally, we'll remove that Laravel session ID that was generated server side by removing the <code>beresp.http.Set-Cookie</code> header.</p>
+						<p>After all that fiddling with the HTTP response, Varnish will store the object in its cache using <em>our</em> modified parameters. So it'll store that object as an <code>HTTP/123</code> response without cookies, even though the server generated an <code>HTTP/200</code>, <em>with</em> cookies and clearly indicated the page shouldn't be cached.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_042.png" alt="varnish_explained_042" width="2816" height="2176" class="alignnone size-full wp-image-8281"></p>
+						<p>So what eventually gets delivered to the client is a page for <code>forge.laravel.com</code> (our client requested <code>laravel.com</code>) with an HTTP status code of <code>HTTP/123</code> (the server actually said it was an <code>HTTP/200</code>), without cookies being set.</p>
+						<p>Such Varnish power. Much amaze. So many places to fuck things up.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_043.png" alt="varnish_explained_043" width="2816" height="2176" class="alignnone size-full wp-image-8282"></p>
+						<p>There's another important Varnish routine though, it's called <code>vcl_hash()</code>. This is where Varnish decides which parameters it will use to determine its cache/hash key. If the key can match an object already in the cache, it will deliver that object.</p>
+						<p>By default, Varnish looks at 3 key parameters: the <code>Host</code>-header, the URL being requested and the cookies sent by the client.</p>
+						<p>Behind the scenes, it will take care of the <code>Content-Encoding</code> that clients can request: it'll store a compressed version of every page in memory, but if a client requests a plain text -- non-compressed -- version, it'll decompress it on the way out and deliver a plain text version to the client.</p>
+						<p>If any of the parameters inside the <code>vcl_hash()</code> routine changes, Varnish will consider it a new HTTP request and the cache lookup will fail.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_044.png" alt="varnish_explained_044" width="2816" height="2176" class="alignnone size-full wp-image-8283"></p>
+						<p>If you were thinking ahead, you can see a problem with that kind of hash-key determination.</p>
+						<p>For instance, the URL <code>/?page=1&amp;languange=nl</code> will show the same content as <code>/?language=nl&amp;page=1</code>, but since the order of the parameters is different, the hash will be different. To resolve this, we normalise the incoming requests as much as possible.</p>
+						<p>Varnish offers a good tool for this called <code>std.querysort()</code>, which will sort the query parameters alphabetically.</p>
+						<p>Additionally, you might want to strip query parameters that are irrelevant to the backend, like Google Analytics campaign trackers.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_045.png" alt="varnish_explained_045" width="2816" height="2176" class="alignnone size-full wp-image-8284"></p>
+						<p>Once you normalised the URL, cookies are the Next Big Thing.</p>
+						<p>Because they are by default used in the hash-key lookup, any change in the cookies client-side will result in a different hash and a new object in the cache.</p>
+						<p>If every one of your users has a unique PHP session ID, every Cookie set will be different and thus every hash-key will be unique. Just setting a unique PHP session ID for all your users would effectively destroy caching for your site, as every request is unique.</p>
+						<p>There are a couple of fixes for this, but the biggest one is to only initialise a PHP session when you need it (ie: on the login page), and not for every page. This is called lazy session initialisation.</p>
+						<p>Alternatively, some XSRF implementations rely on cookies and should be unique per user too.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_046.png" alt="varnish_explained_046" width="2816" height="2176" class="alignnone size-full wp-image-8285"></p>
+						<p>Varnish offers an interesting VMOD (extension to Varnish) to help manipulate Cookies.</p>
+						<p>The <code>cookie.parse</code> object allows to you do interesting things like <a href="https://ma.ttias.be/explicitly-approving-whitelisting-cookies-in-varnish-libvmod-cookie/">whitelisting cookies in Varnish</a>, without crazy mind-breaking regular expressions.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_047.png" alt="varnish_explained_047" width="2816" height="2176" class="alignnone size-full wp-image-8286"></p>
+						<p>In addition, the <code>Host</code> header is also a key in your hashing. So a request for <code>laravel.com</code> and <code>www.laravel.com</code>, even though they're probably the same site, would result in 2 different cached objects in Varnish.</p>
+						<p>To help Varnish, it's best to redirect users to a single domain and not keep multiple possible domains that would result in the same content being generated.</p>
+						<p>There are plenty of <a href="https://ma.ttias.be/technical-guide-seo/">SEO &amp; technical reasons this is a good move too</a>.</p>
+						<p>The code example above detects a page without the <code>www</code>-subdomain and triggers a synthetic response in Varnish, via the new <code>vcl_synth()</code> routine.</p>
+						<p>In that routine, you can detect the <code>resp.status</code> object and create logic handling that differently. In this case, we set a custom error code of 720 in order to replace the <code>Location</code> block in the HTTP response and force a 301 redirect.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_048.png" alt="varnish_explained_048" width="2816" height="2176" class="alignnone size-full wp-image-8287"></p>
+						<p>That same <code>vcl_hash()</code> can be expended to take any HTTP header into account when determining the cache key. It can add Authorization headers for basic HTTP authentication, custom headers for your API, ... </p>
+						<p>We also use it at <a href="https://www.nucleus.be/en/">Nucleus</a> to separate cache responses for HTTP vs. HTTPS content, since we often use an Nginx TLS proxy in front of Varnish.</p>
+						<hr>
+						<h1>Part Five: Flushing the Cache</h1>
+						<p><img src="./VarnishExplained_files/varnish_explained_049.png" alt="varnish_explained_049" width="2816" height="2176" class="alignnone size-full wp-image-8288"></p>
+						<p>There are actually more than 2 hard things in computer science: naming things, cache invalidation, off-by-one errors, DNS, Docker, ... </p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_050.png" alt="varnish_explained_050" width="2816" height="2176" class="alignnone size-full wp-image-8289"></p>
+						<p>There are basically 3 ways to flush a cache: the old PURGE HTTP method (which is basically obsoleted), the newer "ban" method (suggested) or the absolute lazy way: restart your varnish service.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_051.png" alt="varnish_explained_051" width="2816" height="2176" class="alignnone size-full wp-image-8290"></p>
+						<p>The HTTP PURGE method is a "special" HTTP request where you can set the method to PURGE. That in and of itself doesn't actually do anything, but it allows you to catch that special method in varnish's <code>vcl_recv()</code> routine (the very first routine Varnish will call when it receives a request) and trigger an internal cache flush via the <code>return (purge);</code> call.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_052.png" alt="varnish_explained_052" width="2816" height="2176" class="alignnone size-full wp-image-8291"></p>
+						<p>The preferred way is actually to use "bans": this uses the Varnish Administration CLI tool called <code>varnishadm</code> to connect to a running Varnish daemon on its administrative port and send it control commands.</p>
+						<p>This syntax gives you more flexibility to flush content based on regex's, either on the host, the URL or arbitrary headers.</p>
+						<hr>
+						<h1>Part Six: ESI, TTL's, Grace &amp; Saint</h1>
+						<p><img src="./VarnishExplained_files/varnish_explained_053.png" alt="varnish_explained_053" width="2816" height="2176" class="alignnone size-full wp-image-8292"></p>
+						<p>More acronyms! More!</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_054.png" alt="varnish_explained_054" width="2816" height="2176" class="alignnone size-full wp-image-8293"></p>
+						<p>Edge Side Includes are a very powerful but tricky feature of Varnish. By default, Varnish will either cache an entire page, or not cache an entire page.</p>
+						<p>With ESI, Varnish can cache <em>parts of</em> a page. Funky, right?</p>
+						<p>In a way, this works very similar to PHP's <code>include</code> or <code>require</code> method or the old Server Side Includes in webservers.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_055.png" alt="varnish_explained_055" width="2816" height="2176" class="alignnone size-full wp-image-8294"></p>
+						<p>Take for instance a default layout for a news website: it'll contain a personal greeting at the top, some ads, some navigation and the main body.</p>
+						<p>These different "fragments" that usually build a page are what Varnish needs to be able to do partial caching.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_056.png" alt="varnish_explained_056" width="2816" height="2176" class="alignnone size-full wp-image-8295"></p>
+						<p>Instead of generating the content for each partial directly in the HTML/DOM of the page, you generate special <code>esi:include</code> tags instead.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_057.png" alt="varnish_explained_057" width="2816" height="2176" class="alignnone size-full wp-image-8296"></p>
+						<p>Eventually, your server-side generated HTML looks like this. It has several <code>esi:include</code> blocks, where it would normally have either include/require statements from PHP. But instead of having PHP do the combining of the page, those <code>esi:include</code> tags are going to be interpreted by Varnish.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_058.png" alt="varnish_explained_058" width="2816" height="2176" class="alignnone size-full wp-image-8297"></p>
+						<p>When Varnish processes a <code>vcl_backend_response()</code>, it can look inside the body and detect those <code>esi:include</code> tags.</p>
+						<p>For each of those ESI tags, it will -- on its own -- send a new request to the backend and request those URLs. The backend will in turn process them, reply them back to Varnish, and Varnish will build the page by glueing all the fragments together.</p>
+						<p>The biggest benefit is that each fragment can have its own caching policy: in the best case scenario, all those <code>esi:include</code> calls were already in the Varnish cache and it could assemble the page entirely from memory.</p>
+						<p>The magic of ESI is that the user just requested a single page, it had no idea that it would in turn fire of multiple small requests to the backend to assemble that page before getting it delivered.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_059.png" alt="varnish_explained_059" width="2816" height="2176" class="alignnone size-full wp-image-8298"></p>
+						<p>Now, by default, Varnish will look at the <code>Cache-Control</code> headers (or ETAG, Expires, ...) to determine how long it can cache an object. In the absolute best case scenario, the HTTP response headers determine the lifetime of each HTTP response.</p>
+						<p>But you can artificially overwrite that response by setting a new value in the <code>beresp.ttl</code> object.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_060.png" alt="varnish_explained_060" width="2816" height="2176" class="alignnone size-full wp-image-8299"></p>
+						<p>The TTL or cache lifetime can be modified even further by introducing the concept of <em>Grace Mode</em>.</p>
+						<p>You can let Varnish keep objects in its cache that have actually surpassed their lifetime. This is useful in case your backends are down; it's better to serve old content, than no content.</p>
+						<p>It's also of value when there are HTTP requests coming in for expired objects: Varnish can reply with a slightly outdated response, while asynchronously fetching a new version from the backend. Your user never needs to wait for that response (it got a slightly outdated response), while your webserver can generate the response.</p>
+						<p>This is absolutely a lifesaver in cache stampedes scenario's, where Varnish will only send a single request to the backend, even though 100+ users are requesting the same page.</p>
+						<hr>
+						<h1>Bonus: CLI tools</h1>
+						<p><img src="./VarnishExplained_files/varnish_explained_061.png" alt="varnish_explained_061" width="2816" height="2176" class="alignnone size-full wp-image-8300"></p>
+						<p>Quick demo: some CLI tools.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_062.png" alt="varnish_explained_062" width="2816" height="2176" class="alignnone size-full wp-image-8301"></p>
+						<p><code>varnishhist</code> shows a histogram of the requests currently being served by Varnish: the more to the left they are shown, the faster they have been served. These are generally more cache hits, as they're served the fastest.</p>
+						<p>The more items to the right, the slower each request is.</p>
+						<p>A pipe sign <code>|</code> is a cache hit, a hashtag <code>#</code> is a cache miss (can also be a cache miss on purpose, if the VCL code says <code>return (pass);</code>). </p>
+						<p><code>varnishhist</code> is a good quick glance to see if Varnish is caching anything and if so, what the overal ratio is: lots of cache hits or misses. But beyond that, the tool probably won't tell you that much.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_063.png" alt="varnish_explained_063" width="2816" height="2176" class="alignnone size-full wp-image-8302"></p>
+						<p><code>varnishlog</code> on the other hand is the real gem: it will show in great detail the request headers of a user and the response headers returned by Varnish. If you really need to debug Varnish, this'll be the tool that tells you the most.</p>
+						<p>There are filters you can apply to <a href="https://ma.ttias.be/varnish-filter-by-source-ip-using-varnishlog-in-varnish2-varnish3-varnish4/">only log requests from a certain IP</a> (ie: your source IP), <a href="https://ma.ttias.be/useful-varnish-3-0-commands-one-liners-with-varnishtop-and-varnishlog/">only log requests matching a certain URL pattern</a>, you can see <a href="https://ma.ttias.be/varnish-tip-see-cookies-stripped-vcl/">which cookies are being stripped in the VCL and which aren't</a>, etc.</p>
+						<p>The only downside: <code>varnishlog</code> can be a bit daunting at first with lots of output, it takes a while to grok the format.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_064.png" alt="varnish_explained_064" width="2816" height="2176" class="alignnone size-full wp-image-8303"></p>
+						<p>Another interesting one, especially when just getting started with Varnish, is <code>varnishncsa</code>: it takes the complicated <code>varnishlog</code> and shows the output just like the Apache or Nginx access logs.</p>
+						<p>It won't tell you many details (like which cookies get stripped, which VCL routines got triggered etc.), but it will tell you in a more readable format (or at least: a format you're more used to) which requests Varnish is serving.</p>
+						<p>You can also run varnishncsa as a daemon/service to log all requests made by Varnish in this format, a bit like the default behaviour in Apache or Nginx. For debugging purposes, this could be useful.</p>
+						<hr>
+						<h1>Part Seven: getting started with Varnish</h1>
+						<p><img src="./VarnishExplained_files/varnish_explained_065.png" alt="varnish_explained_065" width="2816" height="2176" class="alignnone size-full wp-image-8304"></p>
+						<p>Let's get started.</p>
+						<hr>
+						<p><img src="./VarnishExplained_files/varnish_explained_066.png" alt="varnish_explained_066" width="2816" height="2176" class="alignnone size-full wp-image-8305"></p>
+						<p>This is the really short version of getting started with Varnish;</p>
+						<ul>
+							<li><a href="https://github.com/mattiasgeniar/varnish-4.0-configuration-templates">Download my Varnish templates</a> from Github</li>
+							<li>Install varnish, by default it'll run on a custom port (check <code>/etc/sysconfig/varnish</code>)</li>
+							<li>Configure your backend so that it points to your existing Apache/Nginx</li>
+							<li>Test your site on the custom port: <code>domain.tld:8080</code></li>
+							<li>If everything still works, swap the ports: set your Apache/Nginx on port :8080, move Varnish to port :80 and change the backends in Varnish so that it sends its requests to port :8080.</li>
+						</ul>
+						<p>After that, you're done: Varnish now serves all requests on port :80 and will proxy everything it can't serve to port :8080.</p>
+						<p>Chances are, it'll take longer to implement Varnish than just those couple of steps, but that's basically the gist of it. Run Varnish on an alternative port, so that you can test it safely without interfering with your site, and once it's tested and approved, swap out the ports and let it run on port :80.</p>
+						<p>A couple of tips, that might help you get started quicker;</p>
+						<ul>
+							<li><a href="https://ma.ttias.be/varnish-agent-html-frontend-manage-monitor-varnish-installation/">Varnish Agent: an HTML frontend to manage &amp; monitor your varnish installation</a></li>
+							<li><a href="https://ma.ttias.be/varnish-vcl-syntax-highlighting-in-sublime-text/">Syntax highlighting of VCL files in Sublime Text</a></li>
+							<li><a href="https://ma.ttias.be/debug-varnish-4-x-on-systemd-that-fails-to-start/">Troubleshooting Varnish on systemd</a>, if it won't start</li>
+							<li><a href="https://ma.ttias.be/useful-varnish-3-0-commands-one-liners-with-varnishtop-and-varnishlog/">Some useful varnishlog</a> oneliners to help troubleshoot</li>
+						</ul>
+						<p>As with everything: testing, testing &amp; testing is what will make Varnish deployment a success!</p>
+						<hr>
+						<p></p>
+						<p>The end!</p>
+						<p>For any questions, leave a comment on this blog, poke me on <a href="https://twitter.com/mattiasgeniar">Twitter</a>, send me an e-mail, ... </p>
+					</div>
+
+					<hr>
+				</div>
+			</div>
+		</div>
+	</article>
+	<hr>
+</html>
