@@ -1,0 +1,1 @@
+- <https://htmlpreview.github.io/?https://github.com/dshumsky/docs/blob/master/varnish/VarnishExplained.html>
