@@ -1,35 +1,19 @@
 ##### Commands
-```bash
-
-git branch LIDL-20613 --set-upstream-to origin/development     # change parent
-
-git credential-cache exit                                      # clear credentials
-
-git checkout <commit_id> <path_to_file>                        # return back
-git reset --hard HEAD~1
-git reset --soft  "HEAD^"
-
-git checkout -b LIDL-19882 origin/development                  # create branch
-git branch LIDL-19971 --set-upstream-to origin/development
-
-git config --global diff.tool meld                             # compare
-git difftool -g -d d4d2b16..2f1af0b
-
-git reset --soft "HEAD^"                                       # merge 2 last commits
-git commit --amend
-
-#    get parents
-alias gitparents='git for-each-ref --format="%(refname:short)" refs/heads/* | while read b; do if r=$(git config --get branch.$b.remote); then m=$(git config --get branch.$b.merge); echo "$b -> $r/${m##*/}"; fi; done'
-```
-- Clean-up branches:
-    ```function grmb() {
+- change parent `git branch LIDL-20613 --set-upstream-to origin/development`
+- clear credentials `git credential-cache exit`
+- return back 
+    ```
+    git checkout <commit_id> <path_to_file>
+    git reset --hard HEAD~1
+    git reset --soft  "HEAD^"```
+- compare `git config --global diff.tool meld`, `git difftool -g -d d4d2b16..2f1af0b`
+- get parents `alias gitparents='git for-each-ref --format="%(refname:short)" refs/heads/* | while read b; do if r=$(git config --get branch.$b.remote); then m=$(git config --get branch.$b.merge); echo "$b -> $r/${m##*/}"; fi; done'`
+- clean-up branches: 
+    ```
+    function grmb() {
       git fetch -p
       git branch -v | grep '\[gone\]' | cut -d ' ' -f 3 | xargs git branch -d
     }```
-
-##### Gerrit
-- hooks `cp ~/.git/hooks/commit-msg ./.git/hooks/commit-msg`
-
 
 ##### Move root to `/foo/bar`
 ```
@@ -108,3 +92,5 @@ git rebase ...
 [diff]    
   tool = meld
 ```
+##### Gerrit
+- hooks `cp ~/.git/hooks/commit-msg ./.git/hooks/commit-msg`
