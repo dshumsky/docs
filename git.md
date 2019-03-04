@@ -20,8 +20,13 @@ git commit --amend
 
 #    get parents
 alias gitparents='git for-each-ref --format="%(refname:short)" refs/heads/* | while read b; do if r=$(git config --get branch.$b.remote); then m=$(git config --get branch.$b.merge); echo "$b -> $r/${m##*/}"; fi; done'
-
 ```
+- Clean-up branches:
+    ```function grmb() {
+      git fetch -p
+      git branch -v | grep '\[gone\]' | cut -d ' ' -f 3 | xargs git branch -d
+    }```
+
 
  
 ##### Gerrit
