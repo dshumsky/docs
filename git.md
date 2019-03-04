@@ -13,8 +13,8 @@
     function grmb() {
       git fetch -p
       git branch -v | grep '\[gone\]' | cut -d ' ' -f 3 | xargs git branch -d
-    }```
-
+    }
+    ```
 ##### Move root to `/foo/bar`
 ```
 git filter-branch --prune-empty --tree-filter '
