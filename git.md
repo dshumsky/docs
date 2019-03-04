@@ -26,8 +26,6 @@ alias gitparents='git for-each-ref --format="%(refname:short)" refs/heads/* | wh
       git fetch -p
       git branch -v | grep '\[gone\]' | cut -d ' ' -f 3 | xargs git branch -d
     }```
-
-
  
 ##### Gerrit
 - hooks `cp ~/.git/hooks/commit-msg ./.git/hooks/commit-msg`
