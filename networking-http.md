@@ -13,5 +13,5 @@
     - `Expires` - deprecated
 
 ##### DNS
-dig abc.com +trace
-dig abs.com @ns30.domaincontrol.com
+- dig abc.com +trace
+- dig abs.com @ns30.domaincontrol.com
