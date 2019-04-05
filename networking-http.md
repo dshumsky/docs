@@ -11,3 +11,7 @@
     - `public` - cache is allowed, `private` - disables CDN
     - `max-age` - reuse in seconds
     - `Expires` - deprecated
+
+##### DNS
+dig abc.com +trace
+dig abs.com @ns30.domaincontrol.com
