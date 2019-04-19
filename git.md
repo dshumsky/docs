@@ -1,4 +1,5 @@
 ##### Commands
+- current branch `git rev-parse --abbrev-ref HEAD`
 - change parent `git branch LIDL-20613 --set-upstream-to origin/development`
 - clear credentials `git credential-cache exit`
 - return back 
