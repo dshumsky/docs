@@ -1,0 +1,2 @@
+- https://conemu.github.io/
+- https://www.cheatography.com/alexzaitzev/cheat-sheets/far-3/
