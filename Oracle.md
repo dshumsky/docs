@@ -2,11 +2,11 @@
 #### Queries
 - Find object by name
   ```
-  select * from ALL_OBJECTS where OBJECT_NAME = 'OBJECT_NAME'
+  select * from ALL_OBJECTS where OBJECT_NAME = 'OBJECT_NAME';
   ```
 - Get DDL
   ```
-  SELECT DBMS_METADATA.GET_DDL('OBJECT_TYPE','OBJECT_NAME'[,'OWNER']) FROM DUAL
+  SELECT DBMS_METADATA.GET_DDL('OBJECT_TYPE','OBJECT_NAME'[,'OWNER']) FROM DUAL;
   --
   select dbms_metadata.get_ddl('TABLE', o.OBJECT_NAME),';'
   from user_objects o 
@@ -34,4 +34,20 @@
   --
   SELECT * FROM v$sql_bind_capture
   where SQL_ID in ('bcz2c14ut3hyb');
+  ```
+- Date format
+  ```
+  SELECT value FROM v$nls_parameters WHERE parameter ='NLS_DATE_FORMAT';
+  ```
+- Partitions
+  ```
+  ALTER TABLE table_1 ADD PARTITION COUNTRY_1  VALUES (1) TABLESPACE TS_1;
+  ```
+- Kill session
+  ```
+  select sid,serial# from v$session where username = 'username';
+  alter system kill session '101,12345';   
+- DDL WAIT
+  ```
+  ALTER SESSION SET DDL_LOCK_TIMEOUT = 100;
   ```
