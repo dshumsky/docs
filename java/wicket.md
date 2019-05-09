@@ -1,0 +1,4 @@
+- http://tech.small-improvements.com/2011/04/03/10-things-i-love-about-apache-wicket/
+- http://tech.small-improvements.com/2012/01/11/tuning-wicket-session-size/
+- http://wickettraining.com/ten-things-every-wicket-programmer-should-know.html
+- http://developer.vz.net/2012/02/08/extending-guice-2/
