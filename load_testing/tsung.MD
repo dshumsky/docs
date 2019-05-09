@@ -1,0 +1,6 @@
+- apt-get install erlang
+- apt-get install gnuplot-nox libtemplate-perl libhtml-template-perl libhtml-template-expr-perl
+- download tsung-1.4.1.tar.gz
+- tar -zxvf tsung-1.4.1 .tar.gz
+- ./configure && make && make install
+- create fodler .tsung with a tsung.xml inside
