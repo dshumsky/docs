@@ -51,3 +51,6 @@
   ```
   ALTER SESSION SET DDL_LOCK_TIMEOUT = 100;
   ```
+
+#### SQL Developer
+- Config in `~\AppData\Roaming\Oracle SQL Developer Data Modeler\4.0.2.840\product.conf` (AddVMOption)
