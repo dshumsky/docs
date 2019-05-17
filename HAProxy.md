@@ -1,0 +1,3 @@
+- `acl acl_host_index    hdr_beg(host) index.`
+- `acl acl_root path -i /`
+- `redirect code 301 location /i/ if acl_host_index acl_root`
