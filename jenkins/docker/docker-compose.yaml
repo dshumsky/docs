@@ -1,0 +1,21 @@
+version: "3.5"
+services:
+  jenkins:
+    build: .
+    # user: "root"
+    ports:
+    - "8080:8080"
+    - "50000:50000"
+    volumes:
+    - $PWD/jenkins_home:/var/jenkins_home
+    - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+    - jenkins-net
+
+networks:
+  jenkins-net:
+    name: jenkins-net
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.58.0.0/16
