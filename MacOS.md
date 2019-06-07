@@ -1,0 +1,1 @@
+- f.lux for macOS (reduce blue light)
