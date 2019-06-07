@@ -21,29 +21,31 @@
 - `http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html`
 
 #### Commands
+- Check SSH public-private keys
+    - `cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys`
+    - `ssh -i $HOME/.ssh/id_rsa localhost`
 - Find file and do something: [http://find.unixpin.com/ru/index.html](http://find.unixpin.com/ru/index.html)
-
 - Find and replace
-```bash
-find . -type f -name "*.xml" -exec sed -i "s/spring-beans-2\.0\.xsd/spring-beans-3\.0\.xsd/g" {} \;
-```
+    ```bash
+    find . -type f -name "*.xml" -exec sed -i "s/spring-beans-2\.0\.xsd/spring-beans-3\.0\.xsd/g" {} \;
+    ```
 - Replace
-```bash
-sed '/#.*/ d; /^$/ d' /etc/my.cnf
-```
+    ```bash
+    sed '/#.*/ d; /^$/ d' /etc/my.cnf
+    ```
 - Find file with content
-```bash
-find . -name "*.java" -exec grep "save\|update" {} \;  -print
-```
+    ```bash
+    find . -name "*.java" -exec grep "save\|update" {} \;  -print
+    ```
 
 - Zip files from txt-file
-```
-zip files.zip -@ < files.txt
-```
+    ```
+    zip files.zip -@ < files.txt
+    ```
 - Find file in archives
-```
-for f in `ls *.jar`; do echo "$f: "; unzip -l $f | grep 'Table'; done
-```
+    ```
+    for f in `ls *.jar`; do echo "$f: "; unzip -l $f | grep 'Table'; done
+    ```
 
 #### Audio
 
