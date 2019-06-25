@@ -1,4 +1,5 @@
 ##### Docker
+- `docker inspect $(sudo docker ps -aq) | less` - inspect all
 | Feature                | Description                                                                        |
 |----------------------- | -----------------------------------------------------------------------------------|
 | Fix route after VPN    | sudo route add -net 172.17.0.0 netmask 255.255.0.0 dev docker0                     |
