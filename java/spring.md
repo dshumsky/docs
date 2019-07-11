@@ -1,1 +1,1 @@
-- configuration org.springframework.boot.context.config.ConfigFileApplicationListener.Loader#getSearchLocations()
+- configuration `org.springframework.boot.context.config.ConfigFileApplicationListener.Loader#getSearchLocations()`
