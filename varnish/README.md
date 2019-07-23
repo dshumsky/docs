@@ -3,3 +3,4 @@ Links:
 - https://kly.no/varnish/regex.txt 
 - https://kly.cloud/posts/2010_01_26__Varnish_best_practices__.html
 - https://varnish-cache.org/docs/3.0/reference/vsl.html (TTL explain)
+- https://ma.ttias.be/mark-varnish-backend-healthy-sick-automatic-via-cli/
