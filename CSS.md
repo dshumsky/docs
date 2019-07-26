@@ -1,1 +1,3 @@
-- https://gist.github.com/brettsnippets/5890127 (Flexbox "Cross Browser" Sample)
+- Flexbox "Cross Browser" Sample
+    - https://gist.github.com/brettsnippets/5890127
+    - https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Mixins
