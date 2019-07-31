@@ -3,9 +3,9 @@
 - `daemon.json`:
     ```
     {
-	         "bip": "169.253.20.100/24",
-	         "fixed-cidr": "169.253.20.0/24",
-           "insecure-registries": ["nexus.local:80"]
+      "bip": "169.253.20.100/24",
+      "fixed-cidr": "169.253.20.0/24",
+      "insecure-registries": ["nexus.local:80"]
     }
     ```
 
