@@ -1,4 +1,9 @@
-##### Docker
+#### Configuration
+- delete network link `sudo ip link del docker0`
+
+
+#### Usage
+
 - `docker inspect $(sudo docker ps -aq) | less` - inspect all
 - DNS https://development.robinwinslow.uk/2016/06/23/fix-docker-networking-dns/
 
