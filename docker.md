@@ -5,6 +5,9 @@
     {
       "bip": "169.253.20.100/24",
       "fixed-cidr": "169.253.20.0/24",
+      "default-address-pools":[
+        {"base":"169.253.30.0/24","size":24}
+      ],
       "insecure-registries": ["nexus.local:80"]
     }
     ```
