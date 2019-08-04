@@ -1,0 +1,1 @@
+- https://zaproxy.blogspot.com/2017/06/scanning-apis-with-zap.html
