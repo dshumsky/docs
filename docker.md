@@ -15,7 +15,7 @@
 
 #### Usage
 
-- `docker inspect $(sudo docker ps -aq) | less` - inspect all
+- `docker inspect $(docker ps -aq) | less` - inspect all
 - DNS https://development.robinwinslow.uk/2016/06/23/fix-docker-networking-dns/
 
 | Feature                | Description                                                                        |
