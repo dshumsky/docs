@@ -12,18 +12,18 @@
       "insecure-registries": ["nexus.local:80"]
     }
     ```
-
+- DNS https://development.robinwinslow.uk/2016/06/23/fix-docker-networking-dns/
 
 #### Usage
 
 - `docker inspect $(docker ps -aq) | less` - inspect all
-- DNS https://development.robinwinslow.uk/2016/06/23/fix-docker-networking-dns/
+- start a container
+    - `docker run --rm -it alpine:latest sh`
+    - `docker run --rm alpine:latest tail -f /dev/null`
 
 | Feature                | Description                                                                        |
 |----------------------- | -----------------------------------------------------------------------------------|
 | Fix route after VPN    | sudo route add -net 172.17.0.0 netmask 255.255.0.0 dev docker0                     |
-| start a container      | docker run --rm alpine:latest tail -f /dev/null                                    |
-|                        | docker run --rm -it alpine:latest sh
 | fix vim                | echo "export TERM=xterm" >> ~/.bashrc                                              |
 | Oracle                 | d run --net=host --shm-size=2g alexeiled/docker-oracle-xe-11g:sshd                 |
 | Disconnect             | Ctrl-p + Ctrl-q                                                                    |
@@ -32,10 +32,6 @@
 | Clean                  |                                                                                    |
 | ... (images)           | docker rmi $(docker images --format '{{.ID}}' --filter=dangling=true)              |
 | ... (volumes)          | docker volume rm $(docker volume ls -f dangling=true -q)                           |
-|                        |                                                                                    |
-|                        |                                                                                    |
-|                        |                                                                                    |
-|                        |                                                                                    |
 |                        |                                                                                    |
 
 ##### ./bashrc
