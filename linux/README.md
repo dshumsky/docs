@@ -13,7 +13,7 @@
 - Tweaks -> Fonts -> Scaling Factor
 - `sudo apt-get install compizconfig-settings-manager`, ccsm > Desktop > Desktop Wall
 - `sudo vim /etc/sudoers`, add `username ALL=(ALL) NOPASSWD: ALL`
-- ...
+- `dconf-editor` -> `org->gnome->shell->app-switcher`: `current-workspace-only` to `true`
 
 #### Suspend Fix
 - `sudo dd if=/dev/null of=/var/log/syslog` to clear syslog
