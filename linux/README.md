@@ -20,6 +20,7 @@
   gsettings get org.gnome.desktop.interface text-scaling-factor
   gsettings set org.gnome.desktop.interface text-scaling-factor 0.9
   ```
+- https://plugins.jetbrains.com/plugin/9541-hidpi-profiles  
 
 #### Suspend Fix
 - `sudo dd if=/dev/null of=/var/log/syslog` to clear syslog
