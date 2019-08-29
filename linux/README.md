@@ -14,6 +14,12 @@
 - `sudo apt-get install compizconfig-settings-manager`, ccsm > Desktop > Desktop Wall
 - `sudo vim /etc/sudoers`, add `username ALL=(ALL) NOPASSWD: ALL`
 - `dconf-editor` -> `org->gnome->shell->app-switcher`: `current-workspace-only` to `true`
+- ``` 
+  gsettings list-schemas | grep org.gnome.desktop.interface
+  gsettings list-keys org.gnome.desktop.interface
+  gsettings get org.gnome.desktop.interface text-scaling-factor
+  gsettings set org.gnome.desktop.interface text-scaling-factor 0.9
+  ```
 
 #### Suspend Fix
 - `sudo dd if=/dev/null of=/var/log/syslog` to clear syslog
