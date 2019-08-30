@@ -20,6 +20,7 @@
   gsettings get org.gnome.desktop.interface text-scaling-factor
   gsettings set org.gnome.desktop.interface text-scaling-factor 0.9
   ```
+- gsettings set org.mate.marco.general.focus-new-window 'strict'
 - https://plugins.jetbrains.com/plugin/9541-hidpi-profiles  
 
 #### Suspend Fix
