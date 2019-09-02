@@ -1,5 +1,3 @@
-### Linux
-
 #### Ubuntu
 
 - Enable SSH:  ```apt-get install openssh-server openssh-client```
