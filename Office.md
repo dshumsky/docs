@@ -1,0 +1,3 @@
+- Concat PDFs: `gs -o merged.pdf -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress *.pdf`
+- JPEG to PDF: `gm convert *.jpg file.pdf`
+- Reduce PDF size: `gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=true -dColorImageResolution=60 -dNOPAUSE  -dBATCH -sOutputFile=output.pdf file.pdf`
