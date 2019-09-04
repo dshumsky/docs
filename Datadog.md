@@ -1,0 +1,1 @@
+- Enable `dd-trace-java` DEBUG logging `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug`
