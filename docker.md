@@ -20,19 +20,16 @@
 - start a container
     - `docker run --rm -it alpine:latest sh`
     - `docker run --rm alpine:latest tail -f /dev/null`
-
-| Feature                | Description                                                                        |
-|----------------------- | -----------------------------------------------------------------------------------|
-| Fix route after VPN    | sudo route add -net 172.17.0.0 netmask 255.255.0.0 dev docker0                     |
-| fix vim                | echo "export TERM=xterm" >> ~/.bashrc                                              |
-| Oracle                 | d run --net=host --shm-size=2g alexeiled/docker-oracle-xe-11g:sshd                 |
-| Disconnect             | Ctrl-p + Ctrl-q                                                                    |
-| Build && Run           | d build -t foo . && docker run -it foo                                             |
-| Wait command           | tail -f /dev/null                                                                  |
-| Clean                  |                                                                                    |
-| ... (images)           | docker rmi $(docker images --format '{{.ID}}' --filter=dangling=true)              |
-| ... (volumes)          | docker volume rm $(docker volume ls -f dangling=true -q)                           |
-|                        |                                                                                    |
+- `host.docker.internal` - resolves to the internal IP address used by the host
+- Fix route after VPN    `sudo route add -net 172.17.0.0 netmask 255.255.0.0 dev docker0`
+- fix vim `echo "export TERM=xterm" >> ~/.bashrc`
+- Oracle                 `d run --net=host --shm-size=2g alexeiled/docker-oracle-xe-11g:sshd`
+- Disconnect             `Ctrl-p + Ctrl-q`
+- Build && Run           `d build -t foo . && docker run -it foo`
+- Wait command           `tail -f /dev/null`
+- Clean
+    - images `docker rmi $(docker images --format '{{.ID}}' --filter=dangling=true)`
+    - volumes `docker volume rm $(docker volume ls -f dangling=true -q)`
 
 ##### ./bashrc
 ```
