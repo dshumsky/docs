@@ -22,11 +22,11 @@
 - https://plugins.jetbrains.com/plugin/9541-hidpi-profiles  
 
 #### HiDPI
-https://askubuntu.com/questions/955038/change-the-display-scaling-on-the-fly
-gsettings set org.gnome.desktop.interface text-scaling-factor 1.12
-gsettings set org.gnome.desktop.interface cursor-size 24
-https://ubuntu-mate.community/t/how-to-tweak-your-panel-layouts/884
-Mate Tweak, Appearence Fonts 
+- https://askubuntu.com/questions/955038/change-the-display-scaling-on-the-fly
+- `gsettings set org.gnome.desktop.interface text-scaling-factor 1.12`
+- `gsettings set org.gnome.desktop.interface cursor-size 24`
+- https://ubuntu-mate.community/t/how-to-tweak-your-panel-layouts/884
+- Mate Tweak, Appearence Fonts 
 
 #### Suspend Fix
 - `sudo dd if=/dev/null of=/var/log/syslog` to clear syslog
