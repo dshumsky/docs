@@ -3,6 +3,7 @@
 - Terminal history: ```sudo vim /etc/inputrc```
 - Enable SSH:  ```apt-get install openssh-server openssh-client```
 - Screenshot: `flameshot gui` (`bash -c 'flameshot gui'` in Keyboard Shortcuts)
+- VGA Driver check `sudo lspci | grep -i vga`
 
 - dconf-editor (/org/gnome/desktop/wm/keybindings/switch-to-workspace-*)
 - Tweaks -> Fonts -> Scaling Factor
