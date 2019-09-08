@@ -1,16 +1,12 @@
 #### Ubuntu
-
-- Enable SSH:  ```apt-get install openssh-server openssh-client```
-- Install Mate (https://linuxconfig.org/how-to-install-mate-desktop-on-ubuntu-18-04-bionic-beaver-linux)
+- `sudo vim /etc/sudoers`, add `username ALL=(ALL) NOPASSWD: ALL`
 - Terminal history: ```sudo vim /etc/inputrc```
-- System > Preferences > Hardware > Keyboard Shortcuts: **shutter -s**
-- https://extensions.gnome.org/extension/1160/dash-to-panel/
-- https://extensions.gnome.org/extension/723/pixel-saver/
-- https://extensions.gnome.org/extension/310/alt-tab-workspace/
+- Enable SSH:  ```apt-get install openssh-server openssh-client```
+- Screenshot: `flameshot gui` (`bash -c 'flameshot gui'` in Keyboard Shortcuts)
+
 - dconf-editor (/org/gnome/desktop/wm/keybindings/switch-to-workspace-*)
 - Tweaks -> Fonts -> Scaling Factor
 - `sudo apt-get install compizconfig-settings-manager`, ccsm > Desktop > Desktop Wall
-- `sudo vim /etc/sudoers`, add `username ALL=(ALL) NOPASSWD: ALL`
 - `dconf-editor` -> `org->gnome->shell->app-switcher`: `current-workspace-only` to `true`
 - ``` 
   gsettings list-schemas | grep org.gnome.desktop.interface
