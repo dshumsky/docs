@@ -21,6 +21,11 @@
     - `docker run --rm -it alpine:latest sh`
     - `docker run --rm alpine:latest tail -f /dev/null`
 - `host.docker.internal` - resolves to the internal IP address used by the host
+- access host:
+    - ```
+      extra_hosts:
+      - host.docker.internal:10.36.1.55
+      ```
 - Fix route after VPN    `sudo route add -net 172.17.0.0 netmask 255.255.0.0 dev docker0`
 - fix vim `echo "export TERM=xterm" >> ~/.bashrc`
 - Oracle                 `d run --net=host --shm-size=2g alexeiled/docker-oracle-xe-11g:sshd`
