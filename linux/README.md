@@ -70,9 +70,8 @@ Afterwards you should run ```pulseaudio -k && pulseaudio --start``` to have the 
 
 ##### Audio. Fix `Dummy Output`
 ```
-pulseaudio --kill
-sudo alsa force-reload
-pulseaudio --start
+pulseaudio --kill && sudo alsa force-reload && pulseaudio --start
+rm -rf ~/.config/pulse && pulseaudio -k && pulseaudio --start
 ```
 
 ##### Audio. Fix `Jabra Audio`
