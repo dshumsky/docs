@@ -1,3 +1,4 @@
 - `psql -h <host> -U <user> -d <database>`
 - `\l` - list databases
 - `\c <db>` - switch database
+- `\dt` - show tables
