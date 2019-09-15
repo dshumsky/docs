@@ -1,4 +1,7 @@
-- Enable `Spring Boot`, `Annotation Processors`, `Lombok`-plugin
+- Enable `Spring Boot`, `Annotation Processors`
+- Install plugins:
+    - hidpi-profiles
+    - Lombok
 - Keymap
     - Default for GNOME
     - Main menu -> Navigate -> Back 
