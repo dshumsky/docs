@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: aws-cli
+spec:
+  containers:
+    - name: aws-cli
+      image: mesosphere/aws-cli
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+      command: ["tail", "-f", "/dev/null"]
+
+# apk -uv add --no-cache groff jq less \
+#  && pip install --no-cache-dir awscli==1.16.229
