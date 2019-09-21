@@ -1,9 +1,13 @@
 #### Ubuntu
+- Ubuntu Mate
 - `sudo vim /etc/sudoers`, add `username ALL=(ALL) NOPASSWD: ALL`
 - Terminal history: ```sudo vim /etc/inputrc```
 - Enable SSH:  ```apt-get install openssh-server openssh-client```
 - Screenshot: `flameshot gui` (`bash -c 'flameshot gui'` in Keyboard Shortcuts)
 - VGA Driver check `sudo lspci | grep -i vga`
+- <https://wiki.archlinux.org/index.php/Dell_XPS_15_9570>
+- Add `/etc/default/grub` <- `GRUB_CMDLINE_LINUX_DEFAULT="mem_sleep_default=deep"`
+
 
 - dconf-editor (/org/gnome/desktop/wm/keybindings/switch-to-workspace-*)
 - Tweaks -> Fonts -> Scaling Factor
