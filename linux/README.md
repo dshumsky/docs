@@ -1,6 +1,6 @@
 #### Ubuntu
-- Ubuntu Mate
-- `sudo vim /etc/sudoers`, add `username ALL=(ALL) NOPASSWD: ALL`
+Ubuntu Mate
+`sudo vim /etc/sudoers`, add `username ALL=(ALL) NOPASSWD: ALL`
 - Terminal history: ```sudo vim /etc/inputrc```
 - Enable SSH:  ```apt-get install openssh-server openssh-client```
 - Screenshot: `flameshot gui` (`bash -c 'flameshot gui'` in Keyboard Shortcuts)
