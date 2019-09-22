@@ -7,7 +7,7 @@
 - VGA Driver check `sudo lspci | grep -i vga`
 - <https://wiki.archlinux.org/index.php/Dell_XPS_15_9570>
 - Add `/etc/default/grub` <- `GRUB_CMDLINE_LINUX_DEFAULT="mem_sleep_default=deep"`
-
+- Disable Bluetooth: `/etc/bluetooth/main.conf` <- `AutoEnable=false`
 
 - dconf-editor (/org/gnome/desktop/wm/keybindings/switch-to-workspace-*)
 - Tweaks -> Fonts -> Scaling Factor
