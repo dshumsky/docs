@@ -8,11 +8,13 @@
 - <https://wiki.archlinux.org/index.php/Dell_XPS_15_9570>
 - Add `/etc/default/grub` <- `GRUB_CMDLINE_LINUX_DEFAULT="mem_sleep_default=deep"`
 - Disable Bluetooth: `/etc/bluetooth/main.conf` <- `AutoEnable=false`
+- `dconf-editor`:
+    - `org.mate.Marco.general reduced-resources true`
+    - `org.gnome.shell.app-switcher current-workspace-only true`
 
 - dconf-editor (/org/gnome/desktop/wm/keybindings/switch-to-workspace-*)
 - Tweaks -> Fonts -> Scaling Factor
 - `sudo apt-get install compizconfig-settings-manager`, ccsm > Desktop > Desktop Wall
-- `dconf-editor` -> `org->gnome->shell->app-switcher`: `current-workspace-only` to `true`
 - ``` 
   gsettings list-schemas | grep org.gnome.desktop.interface
   gsettings list-keys org.gnome.desktop.interface
