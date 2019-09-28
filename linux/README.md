@@ -7,6 +7,10 @@
 - VGA Driver check `sudo lspci | grep -i vga`
 - <https://wiki.archlinux.org/index.php/Dell_XPS_15_9570>
 - Add `/etc/default/grub` <- `GRUB_CMDLINE_LINUX_DEFAULT="mem_sleep_default=deep"`
+- `sudo apt install tlp`, edit `/etc/default/tlp`, `DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"`
+
+
+
 - Disable Bluetooth: `/etc/bluetooth/main.conf` <- `AutoEnable=false`
 - `dconf-editor`:
     - `org.mate.Marco.general reduced-resources true`
