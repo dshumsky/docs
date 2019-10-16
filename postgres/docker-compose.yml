@@ -1,0 +1,13 @@
+postgres-db:
+  container_name: user-service-db
+  image: postgres:10.6-alpine
+  environment:
+    - POSTGRES_DB=user_service
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=password
+  volumes:
+  - ${PWD}/postgres-data:/var/lib/postgresql/data
+  ports:
+    - "5432:5432"
+
+# sql -h localhost -U postgres -d user_service

@@ -1,5 +1,0 @@
-digraph graphname {
-	Google -> Apple [label=50, color=blue];
-	Apple -> UCLA [label=-10, color=red];
-	Apple -> Stanford [label="A", color=green];
-}

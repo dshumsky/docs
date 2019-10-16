@@ -1,3 +1,0 @@
-Enter text: input:fmt.Println
-Enter text: input:fmt.Println
-Hello World!
