@@ -1,0 +1,28 @@
+filebeat.inputs:
+  - type: container
+    paths:
+      - '/var/lib/docker/containers/*/*.log'
+    containers.ids: '*'
+    processors:
+      - decode_json_fields:
+          fields:
+            - message
+          target: json
+      - add_docker_metadata: ~
+      # - include_fields:
+      #     fields:
+      #       - container.name
+      - drop_fields:
+          when:
+            has_fields:
+              - json
+          fields:
+            - message
+
+output:
+  logstash:
+    loadbalance: true
+    hosts: ["localhost:12220"]
+
+logging:
+  json: true
