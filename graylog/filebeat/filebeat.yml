@@ -12,12 +12,27 @@ filebeat.inputs:
       # - include_fields:
       #     fields:
       #       - container.name
+      - drop_event:
+          when:
+            not:
+              or:
+                - has_fields:
+                    - json.message
+                - regexp:
+                    container.name: ".*logging_container.*"
       - drop_fields:
           when:
             has_fields:
-              - json
+              - json.message
           fields:
             - message
+      - rename:
+          when:
+            has_fields:
+              - json.message
+          fields:
+            - from: "json.message"
+              to: "message"
 
 output:
   logstash:

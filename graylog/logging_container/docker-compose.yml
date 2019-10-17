@@ -1,0 +1,7 @@
+version: '2'
+services:
+  logging_container:
+    container_name: logging_container
+    build:
+      context: .
+      dockerfile: Dockerfile

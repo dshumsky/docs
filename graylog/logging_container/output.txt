@@ -1,0 +1,3 @@
+Plain INFO Hello World! #2
+Plain ERROR Error message.
+Plain DEBUG Debug message.

@@ -1,0 +1,14 @@
+[
+  {
+    "level": "INFO",
+    "message": "Hello World! #2"
+  },
+  {
+    "level": "ERROR",
+    "message": "Error message."
+  },
+  {
+    "level": "DEBUG",
+    "message": "Debug message."
+  }
+]
