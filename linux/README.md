@@ -96,3 +96,8 @@ Section "InputClass"
 EndSection
 ```
 you can disconnect/connect the headset or start without it and then connect it and nothing freezes.
+
+##### WebCam
+- switch to another webcam: 
+- `v4l2-ctl --list-devices`
+- `sudo rm /dev/video0 && sudo ln -s /dev/video2 /dev/video0`
