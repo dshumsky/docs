@@ -1,0 +1,12 @@
+# ansible-playbook shell_retry.yaml
+
+- name: shell with retry
+  hosts: localhost
+  # sudo: yes
+
+  tasks:
+    - shell: echo "23" | grep -c -e '1'
+      register: grep_result
+      retries: 3
+      delay: 0
+      until: grep_result.stdout == "1"
