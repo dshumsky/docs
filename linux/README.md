@@ -101,3 +101,6 @@ you can disconnect/connect the headset or start without it and then connect it a
 - switch to another webcam: 
 - `v4l2-ctl --list-devices`
 - `sudo rm /dev/video0 && sudo ln -s /dev/video2 /dev/video0`
+
+#### TODOs
+- https://askubuntu.com/questions/1033206/switch-to-console-in-ubuntu-18-04-how-to-leave-gui
