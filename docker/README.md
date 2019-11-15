@@ -3,6 +3,9 @@
 - `sudo ip link add name docker0 type bridge && sudo ip addr add dev docker0 172.17.0.1/16`
 - modify `daemon.json`:
 - DNS <https://development.robinwinslow.uk/2016/06/23/fix-docker-networking-dns/>
+    - `nslookup <some-site>` to get `DNS SERVER`
+    - Add `"dns": ["<DNS SERVER>"]` to `/etc/docker/daemon.json`
+    - `sudo service docker restart`
 
 #### Usage
 
