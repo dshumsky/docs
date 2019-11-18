@@ -1,4 +1,7 @@
 #### Helm
+- Start Tiller locally:
+    - `export HELM_HOST=localhost:44134`
+    - `tiller -listen ${HELM_HOST} -alsologtostderr >/dev/null 2>&1 &`
 - Running HELM locally <https://blog.giantswarm.io/what-you-yaml-is-what-you-get/>
 
 #### Create `kubeconfig` for ServiceAccount 
