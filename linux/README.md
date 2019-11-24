@@ -98,6 +98,7 @@ EndSection
 you can disconnect/connect the headset or start without it and then connect it and nothing freezes.
 
 ##### WebCam
+- reload `sudo rm -f /dev/video0 && sudo rmmod uvcvideo && sudo modprobe uvcvideo`
 - switch to another webcam: 
 - `v4l2-ctl --list-devices`
 - `sudo rm /dev/video0 && sudo ln -s /dev/video2 /dev/video0`
