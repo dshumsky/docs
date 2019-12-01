@@ -8,3 +8,5 @@
 - `lsblk`, `sudo file -s /dev/xvdb1`, 
 - `mkdir /xvdb1`, `sudo mount /dev/xvdb1 /xvdb1`
 
+#### CloudFront
+- <https://medium.com/@peatiscoding/here-is-how-easy-it-is-to-deploy-an-angular-spa-single-page-app-as-a-static-website-using-s3-and-6aa446db38ef>
