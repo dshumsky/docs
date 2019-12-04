@@ -35,6 +35,9 @@
 - https://ubuntu-mate.community/t/how-to-tweak-your-panel-layouts/884
 - Mate Tweak, Appearence Fonts 
 
+#### WiFI
+- reinstall drivers `apt-get --reinstall install linux-firmware` 
+
 #### Suspend Fix
 - `sudo dd if=/dev/null of=/var/log/syslog` to clear syslog
 - `systemctl suspend -i`
