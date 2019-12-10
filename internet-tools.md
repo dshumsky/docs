@@ -1,2 +1,0 @@
-- <https://beeceptor.com/> - Rest API mocking and intercepting
-- <https://codeship.com/> - SaaS CI/CD platform
