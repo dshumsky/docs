@@ -5,7 +5,8 @@
 
 #### Mount another volume
 - <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html>
-- `lsblk`, `sudo file -s /dev/xvdb1`, 
+- `lsblk`
+- `sudo file -s /dev/xvdb1` - to get information about a device
 - `mkdir /xvdb1`, `sudo mount /dev/xvdb1 /xvdb1`
 
 #### CloudFront
