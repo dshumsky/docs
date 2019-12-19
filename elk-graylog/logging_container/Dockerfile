@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk add jq
+RUN apk add jq bash
 
 COPY output.txt /output.txt
 COPY output.json /output.json

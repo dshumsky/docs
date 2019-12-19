@@ -5,8 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    networks:
-      - my
 
 networks:
   default:

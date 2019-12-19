@@ -8,9 +8,16 @@ output:
   #   codec.json:
   #     pretty: true
 
+
   elasticsearch:
-    hosts: ["https://elasticsearch:9200"]
-    index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"
+    hosts: ["http://elasticsearch:9200"]
+
+  #   index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"
+  # setup:
+  #   template:
+  #     name: "filebeat"
+  #     pattern: "filebeat-*"
+
 
   # logstash:
   #   loadbalance: true
@@ -27,14 +34,19 @@ filebeat.inputs:
             - message
           target: json
       - add_docker_metadata: ~
-      # - drop_event:
-      #     when:
-      #       or:
-      #         - equals:
-      #             container.name: filebeat
-      # - include_fields:
-      #     fields:
-      #       - container.name
+      - drop_event:
+          when:
+            or:
+              - equals:
+                  container.name: filebeat
+      - include_fields:
+          # when:
+          fields:
+            - container.name
+            - container.image.name
+            - json.level
+            - json.message
+            - message
       - add_fields:
           target: ""
           fields:

@@ -1,10 +1,10 @@
 .PHONY:
 
 up:
-	docker-compose --compatibility up -d --build
+	./up.sh
 
 down:
-	docker-compose down
+	./down.sh
 
 clean:
 	sudo rm -rf ./data
