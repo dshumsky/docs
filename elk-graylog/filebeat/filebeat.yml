@@ -1,0 +1,41 @@
+# logging:
+#   json: true
+
+output:
+  # file:
+  #   enabled: true
+  #   path: /tmp/filebeat
+  #   codec.json:
+  #     pretty: true
+
+  elasticsearch:
+    hosts: ["https://elasticsearch:9200"]
+    index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+  # logstash:
+  #   loadbalance: true
+  #   hosts: ["localhost:12220"] # Graylog
+
+filebeat.inputs:
+  - type: container
+    paths:
+      - '/var/lib/docker/containers/*/*.log'
+    containers.ids: '*'
+    processors:
+      - decode_json_fields:
+          fields:
+            - message
+          target: json
+      - add_docker_metadata: ~
+      # - drop_event:
+      #     when:
+      #       or:
+      #         - equals:
+      #             container.name: filebeat
+      # - include_fields:
+      #     fields:
+      #       - container.name
+      - add_fields:
+          target: ""
+          fields:
+            env: local

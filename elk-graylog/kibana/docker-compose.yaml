@@ -1,0 +1,20 @@
+version: '3.5'
+services:
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.4.3
+    container_name: kibana
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    mem_limit: 1g
+    ports:
+      - 5601:5601
+    volumes:
+      - ${PWD}/kibana.yml:/usr/share/kibana/config/kibana.yml
+    networks:
+      - my
+
+networks:
+  default:
+    external:
+      name: my
+
