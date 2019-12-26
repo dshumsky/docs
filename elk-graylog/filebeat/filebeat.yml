@@ -39,15 +39,13 @@ filebeat.inputs:
             or:
               - equals:
                   container.name: filebeat
-      - include_fields:
-          # when:
-          fields:
-            - container.name
-            - container.image.name
-            - json.level
-            - json.message
-            - message
-      - add_fields:
-          target: ""
-          fields:
-            env: local
+      - drop_fields:
+          when:
+            or:
+              - has_fields: ['json.req.method', 'json.req.url'] # Kibana
+          fields: ["message"]
+          ignore_missing: true
+      # - add_fields:
+      #     target: ""
+      #     fields:
+      #       env: local

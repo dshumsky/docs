@@ -1,3 +1,11 @@
+# Enabling web-camera in VirtualBox
+- Install Extension Pack <https://www.virtualbox.org/wiki/Download_Old_Builds_5_2>
+```
+VBoxManage list webcams
+VBoxManage controlvm Win10 webcam attach /dev/video0
+VBoxManage controlvm Win10 webcam list
+```
+
 # Run Cisco Webex on 64-bit Ubuntu 16.04
 
 **With Audio and Screen Sharing Enabled**
