@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  labels:
+    failure-domain.beta.kubernetes.io/region: us-west-2
+    failure-domain.beta.kubernetes.io/zone: us-west-2a
+  name: pv-a
+  namespace: larksettings-pii
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 320Gi
+  awsElasticBlockStore:
+    fsType: xfs
+    volumeID: aws://us-west-2a/vol-xxxxxxxxxxxxx
+  storageClassName: mongo-xfs
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: mongodb-replicaset
+    release: pii
+  name: datadir-pii-mongodb-replicaset-0
+  namespace: larksettings-pii
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 320Gi
+  storageClassName: mongo-xfs
+  volumeName: pv-a

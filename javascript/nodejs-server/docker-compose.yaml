@@ -1,0 +1,16 @@
+version: '3.5'
+services:
+  nodejs-server:
+    container_name: nodejs-server
+    build:
+      context: .
+    # entrypoint: ["tail", "-f", "/dev/null"]
+    environment:
+      TEST: "TEST"
+    ports:
+      - "8080:8080"
+
+networks:
+  default:
+    external:
+      name: my

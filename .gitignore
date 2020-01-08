@@ -8,6 +8,5 @@ buildSrc/build/
 out/
 rebel.xml
 node_modules/
-package-lock.json
 
 jenkins/docker/jenkins_home
