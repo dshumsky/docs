@@ -1,0 +1,30 @@
+version: '3.5'
+services:
+  varnish:
+    container_name: varnish
+    build:
+      context: .
+    command: ["varnishd", "-F",
+              "-a", ":80",
+              "-f", "/etc/varnish/varnish.d/default.vcl",
+              "-T", ":9082",
+              "-p", "nuke_limit=1000",
+              "-p", "thread_pool_min=100",
+              "-p", "thread_pool_max=5000",
+              "-p", "vcl_dir=/etc/varnish/varnish.d",
+              "-s", "malloc,1G",
+              "-P", "/var/run/varnish.pid"]
+    # command: ["tail", "-f", "/dev/null"]
+    environment:
+      VARNISHD_PARAMS: ""
+    ports:
+      - "80:80"
+      - "9082:9082" # management interface
+    volumes:
+      - ${PWD}/varnish.d:/etc/varnish/varnish.d:ro
+      # - ${PWD}/html/:/etc/varnish/html/:ro
+
+networks:
+  default:
+    external:
+      name: my

@@ -2,6 +2,8 @@
 - `varnishadm param.show default_ttl`
 
 #### Links:
+- <https://varnish-cache.org/docs/trunk/reference/states.html>
+--------------------
 - https://book.varnish-software.com/4.0/chapters/VCL_Basics.html
     - Grace	https://book.varnish-software.com/4.0/chapters/Saving_a_Request.html#grace-mode
     - Caching	https://book.varnish-software.com/4.0/chapters/VCL_Basics.html#vcl-backend-response
