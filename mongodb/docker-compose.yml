@@ -1,0 +1,17 @@
+version: '3.5'
+services:
+  mongodb:
+    image: mongo:4.2.3
+    user: ${CURRENT_UID}
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data:/data/db
+
+networks:
+  default:
+    external:
+      name: my

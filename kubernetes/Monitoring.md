@@ -11,5 +11,9 @@ cpu_usage: >
 ram_usage: >
   sum by (instance) (container_memory_working_set_bytes{id="/"}) / 
   sum by (instance) (machine_memory_bytes{}) * 100
+
+persistent_volume: >
+  sum by (instance,namespace,persistentvolumeclaim) (kubelet_volume_stats_used_bytes{}) / 
+  sum by (instance,namespace,persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{}) * 100
 ```
 

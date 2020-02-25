@@ -12,3 +12,12 @@
 
 #### CloudFront
 - <https://medium.com/@peatiscoding/here-is-how-easy-it-is-to-deploy-an-angular-spa-single-page-app-as-a-static-website-using-s3-and-6aa446db38ef>
+
+#### Extend volume
+```bash
+# Modify volume in AWS GUI
+# Attach to EC2
+lsblk
+apt-get install e2fsprogs
+resize2fs /dev/nvme1n1
+```
