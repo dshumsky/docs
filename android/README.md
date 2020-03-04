@@ -19,3 +19,5 @@ alias android-mount="jmtpfs ~/android"
 alias android-unmount="fusermount -u ~/android"
 ```
 
+#### Google Play
+- <https://support.magplus.com/hc/en-us/articles/204270878-Android-Setting-up-Your-Google-Play-Developer-Account> 

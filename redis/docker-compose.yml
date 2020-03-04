@@ -1,0 +1,15 @@
+version: '3.5'
+services:
+  redis:
+    container_name: redis
+    image: redis:5.0.7
+    # environment:
+    ports:
+      - 6379:6379
+#    volumes:
+#      - ./data:/data/db
+
+networks:
+  default:
+    external:
+      name: my
