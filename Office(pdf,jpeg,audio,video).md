@@ -1,8 +1,10 @@
 - Concat PDFs: `gs -o merged.pdf -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress *.pdf`
 - JPEG to PDF: `gm convert *.jpg file.pdf`
 - Reduce PDF size: `gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=true -dColorImageResolution=60 -dNOPAUSE  -dBATCH -sOutputFile=output.pdf file.pdf`
--  Cut audio/video files:
+- Cut audio/video files:
     - https://www.epifocal.net/blog/video-stabilization-with-ffmpeg
     - `sudo aptitude install mpgtx`
     - `mptsplit input.mp3 [00:00:20-00:00:58] -o output.mp3`
     - `ls | grep mp3 | xargs -I{} -n1 echo "mpgsplit {} [0:35-] -o x{}"`
+- Convert DOCX to PDF:
+    - `libreoffice --headless --convert-to pdf *.docx`
