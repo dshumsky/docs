@@ -2,14 +2,11 @@
 - Ubuntu Mate
 - `sudo vim /etc/sudoers`, add `username ALL=(ALL) NOPASSWD: ALL`
 - Terminal history: ```sudo vim /etc/inputrc```
-- Enable SSH:  ```apt-get install openssh-server openssh-client```
 - Screenshot: `flameshot gui` (`bash -c 'flameshot gui'` in Keyboard Shortcuts)
 - VGA Driver check `sudo lspci | grep -i vga`
 - <https://wiki.archlinux.org/index.php/Dell_XPS_15_9570>
 - Add `/etc/default/grub` <- `GRUB_CMDLINE_LINUX_DEFAULT="mem_sleep_default=deep"`
 - `sudo apt install tlp`, edit `/etc/default/tlp`, `DEVICES_TO_DISABLE_ON_STARTUP="bluetooth"`
-
-
 
 - Disable Bluetooth: `/etc/bluetooth/main.conf` <- `AutoEnable=false`
 - `dconf-editor`:
@@ -27,6 +24,10 @@
   ```
 - gsettings set org.mate.marco.general.focus-new-window 'strict'
 - https://plugins.jetbrains.com/plugin/9541-hidpi-profiles  
+
+#### SSH
+- Enable SSH: `apt-get install openssh-server openssh-client`
+- Remove password from SSH key: `openssl rsa -in ./key -out ./key-without-password`
 
 #### HiDPI
 - https://askubuntu.com/questions/955038/change-the-display-scaling-on-the-fly
