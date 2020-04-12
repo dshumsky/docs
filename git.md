@@ -16,6 +16,11 @@
       git branch -v | grep '\[gone\]' | cut -d ' ' -f 3 | xargs git branch -d
     }
     ```
+#### Tags
+- `git fetch --all --tags`  
+- delete all local tags `git tag -d $(git tag -l)`
+- delete remote tag `git push origin :tagA`
+  
 ##### Move root to `/foo/bar`
 ```
 git filter-branch --prune-empty --tree-filter '
