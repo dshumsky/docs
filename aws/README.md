@@ -17,7 +17,13 @@
 ```bash
 # Modify volume in AWS GUI
 # Attach to EC2
+
 lsblk
+sudo file -s /dev/nvme?n*
+sudo file -s /dev/x*
+
+sudo growpart /dev/nvme1n1 1
+
 apt-get install e2fsprogs
 resize2fs /dev/nvme1n1
 ```
