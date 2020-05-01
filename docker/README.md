@@ -26,8 +26,9 @@
 - Build && Run `d build -t foo . && docker run -it foo`
 - Wait command `tail -f /dev/null`
 - Clean
-    - images `docker rmi $(docker images --format '{{.ID}}' --filter=dangling=true)`
-    - volumes `docker volume rm $(docker volume ls -f dangling=true -q)`
+    - `docker rmi $(docker images --format '{{.ID}}' --filter=dangling=true)`
+    - `docker volume rm $(docker volume ls -f dangling=true -q)`
+    - `docker images -a | grep "pattern" | awk '{print $3}' | xargs docker rmi`
 
 ##### ./bashrc
 ```

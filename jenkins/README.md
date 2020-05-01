@@ -15,3 +15,6 @@
     println(hudson.util.Secret.fromString("{...}").getPlainText())
     ``` 
 - `echo "..." | base64 --decode`
+
+#### CSP
+- <https://wiki.jenkins.io/display/JENKINS/Configuring+Content+Security+Policy>

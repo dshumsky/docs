@@ -25,10 +25,6 @@
 - gsettings set org.mate.marco.general.focus-new-window 'strict'
 - https://plugins.jetbrains.com/plugin/9541-hidpi-profiles  
 
-#### SSH
-- Enable SSH: `apt-get install openssh-server openssh-client`
-- Remove password from SSH key: `openssl rsa -in ./key -out ./key-without-password`
-
 #### HiDPI
 - https://askubuntu.com/questions/955038/change-the-display-scaling-on-the-fly
 - `gsettings set org.gnome.desktop.interface text-scaling-factor 1.12`
