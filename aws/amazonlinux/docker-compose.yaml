@@ -1,0 +1,17 @@
+version: '3.5'
+services:
+  amazonlinux:
+    build:
+      context: .
+    container_name: amazonlinux
+    command: ["tail", "-f", "/dev/null"]
+    ports:
+      - "22:60022"
+    volumes:
+      - ${PWD}/sshd_config:/etc/ssh/sshd_config:ro
+    network_mode: host
+
+# networks:
+#   default:
+#     external:
+#       name: my

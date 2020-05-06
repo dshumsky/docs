@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fs-support
+  namespace: default
+spec:
+  shareProcessNamespace: true
+  containers:
+    - name: busybox
+      image: busybox:1.29.2
+      command: ["tail", "-f", "/dev/null"]
+      volumeMounts:
+        - name: host
+          mountPath: /host
+      securityContext:
+        capabilities:
+          add:
+            - SYS_PTRACE
+      stdin: true
+      tty: true
+  volumes:
+    - name: host
+      hostPath:
+        path: /
+        type: Directory
+  nodeSelector:
+    kubernetes.io/hostname: ip-10-3-23-105.me-south-1.compute.internal
+  tolerations:
+    - operator: "Exists" # matches all keys, effects and values i.e. tolerate everything
