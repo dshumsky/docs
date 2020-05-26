@@ -1,3 +1,6 @@
+#### Configuration
+<https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms>
+
 #### Metrics
 - Check module is already enabled
      - `nginx -V 2>&1 | grep -o with-http_stub_status_module`
