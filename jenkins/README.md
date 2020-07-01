@@ -18,3 +18,10 @@
 
 #### CSP
 - <https://wiki.jenkins.io/display/JENKINS/Configuring+Content+Security+Policy>
+
+#### Deploy from `Branch` and `Tag`
+`Git Parameter`: `Branch`
+`Branch Specifier`: `remotes/${BRANCH}`
+
+`Git Parameter`: `Tag`
+`Branch Specifier`: `tags/${TAG}`

@@ -42,3 +42,10 @@ all:
           ansible_ssh_private_key_file: dev-key
           ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q ec2-user@xx.xx.xx.xx"'
 ```
+
+#### Check Fingerprint of the SSH Key
+```bash
+ssh-keygen -l -f key.pub 
+ssh-keygen -l -E md5 -f key.pub  (old)
+ssh-keygen -l -f key
+```

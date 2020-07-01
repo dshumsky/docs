@@ -18,6 +18,15 @@ function echo_odd_numbers() {
   done
 }
 
+function calc() {
+  read X
+  read Y
+  echo $(expr $X + $Y)
+  echo $(expr $X - $Y)
+  echo $(expr $X '*' $Y)
+  echo $(expr $X / $Y)
+}
+
 sum=$(sum 1 2 3)
 echo "sum 1 2 3 = $sum"
 echo ""

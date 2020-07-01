@@ -21,9 +21,9 @@
 lsblk
 sudo file -s /dev/nvme?n*
 sudo file -s /dev/x*
-
 sudo growpart /dev/nvme1n1 1
 
+df -h
 apt-get install e2fsprogs
 resize2fs /dev/nvme1n1
 ```
