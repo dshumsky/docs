@@ -58,3 +58,11 @@ curl -XPOST 'localhost:9200/$INDEX/_delete_by_query
 
 curl -XPOST 'localhost:9200/filebeat-7.5.1-2020.03.14-000003/_forcemerge?only_expunge_deletes=true&pretty'
 ```
+
+#### Recover from `max_shards_per_node`
+<https://berrynetworks.wordpress.com/tag/max_shards_per_node/>
+<https://stackoverflow.com/questions/50609417/elasticsearch-error-cluster-block-exception-forbidden-12-index-read-only-all>
+
+PUT /_all/_settings 
+{"index.blocks.read_only_allow_delete": null}
+
