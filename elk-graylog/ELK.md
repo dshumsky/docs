@@ -66,3 +66,25 @@ curl -XPOST 'localhost:9200/filebeat-7.5.1-2020.03.14-000003/_forcemerge?only_ex
 PUT /_all/_settings 
 {"index.blocks.read_only_allow_delete": null}
 
+#### Recover from Out-Of-Space
+```
+- Delete unnessary indexes
+- Wait for free space
+
+- Fix all indexes by:
+PUT filebeat-7.5.1-2020.09.21-000012/_settings
+{
+  "index.blocks.read_only_allow_delete": null
+}
+
+- Rollover manually
+POST /filebeat-7.5.1/_rollover
+{
+  "conditions": {
+    "max_age":   "1d",
+    "max_docs":  1000,
+    "max_size": "1gb"
+  }
+}
+
+```
