@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo-shell
+  namespace: default
+spec:
+  containers:
+    - name: mongo-shell
+      image: samsao/mongo-shell
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+      command: ["tail", "-f", "/dev/null"]
+      env:
+      - name: MONGO_URL
+        value: ""
