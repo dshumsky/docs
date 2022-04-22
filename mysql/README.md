@@ -9,6 +9,7 @@ show tables;
 
 show status where `variable_name` = 'Threads_connected';
 show processlist;
+SHOW ENGINE INNODB STATUS;
 ```
 
 ##### Logging
